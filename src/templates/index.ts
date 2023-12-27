@@ -1,3 +1,5 @@
+import { FooterFlexTemplate } from './const'
+
 const modules = import.meta.glob<any>('./**/*.json')
 
 const templates: {
@@ -31,7 +33,10 @@ for (const slug in modulesByPath) {
   templates.push({
     name: metadataData.name,
     defaults: metadataData.defaults,
-    json: templateData,
+    json: {
+      ...templateData,
+      footer: FooterFlexTemplate,
+    },
   })
 }
 
