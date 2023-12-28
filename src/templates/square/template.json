@@ -42,20 +42,20 @@
                 "text": "{{title}}",
                 "size": "xl",
                 "weight": "bold",
-                "color": "#ffd700",
+                "color": "{{text_color}}",
                 "wrap": true
               },
               {
                 "type": "text",
                 "text": "{{description}}",
-                "color": "#ffd700",
+                "color": "{{text_color}}",
                 "size": "md",
                 "wrap": true
               },
               {
                 "type": "text",
                 "text": "{{name}}",
-                "color": "#ffd700",
+                "color": "{{text_color}}",
                 "size": "md",
                 "flex": 0,
                 "wrap": true

@@ -14,6 +14,15 @@ dependencies:
   '@line/liff':
     specifier: ^2.23.0
     version: 2.23.0
+  '@react-aria/color':
+    specifier: 3.0.0-beta.28
+    version: 3.0.0-beta.28(react-dom@18.2.0)(react@18.2.0)
+  '@react-spectrum/color':
+    specifier: 3.0.0-beta.29
+    version: 3.0.0-beta.29(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0)
+  '@react-stately/color':
+    specifier: ^3.5.1
+    version: 3.5.1(react@18.2.0)
   axios:
     specifier: ^1.6.3
     version: 1.6.3
@@ -1360,6 +1369,28 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-aria/color@3.0.0-beta.28(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Ckznq5ad3n69TuWFM7FpqG3B5rN99ADIFOXKKHBtJ8hGRPBVtvma1LdNb69Fryr0COMMfJGk4tqzdN0b1ziLMQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/i18n': 3.10.0(react@18.2.0)
+      '@react-aria/interactions': 3.20.1(react@18.2.0)
+      '@react-aria/slider': 3.7.4(react@18.2.0)
+      '@react-aria/spinbutton': 3.6.1(react-dom@18.2.0)(react@18.2.0)
+      '@react-aria/textfield': 3.14.0(react@18.2.0)
+      '@react-aria/utils': 3.23.0(react@18.2.0)
+      '@react-aria/visually-hidden': 3.8.8(react@18.2.0)
+      '@react-stately/color': 3.5.1(react@18.2.0)
+      '@react-stately/form': 3.0.0(react@18.2.0)
+      '@react-types/color': 3.0.0-beta.21(react@18.2.0)
+      '@react-types/shared': 3.22.0(react@18.2.0)
+      '@swc/helpers': 0.5.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
   /@react-aria/combobox@3.8.1(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-0Zsy91WC2uhnIjtProL1E5qRjBtRVdsNgpr8T9QCQht4i2sHd8L/srrOx7b6vRIngUMZq7GofOpQcKVdxx4kEA==}
     peerDependencies:
@@ -2193,6 +2224,32 @@ packages:
       react: 18.2.0
     transitivePeerDependencies:
       - react-dom
+    dev: false
+
+  /@react-spectrum/color@3.0.0-beta.29(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-gu8HOlc7flSFJx46hvFzatAbLnvp0DmlY+kfG8/JLDfHZy8dfBozgIwr5ZxM4XEBRRSM3sxss9i33UIWLLiL2Q==}
+    peerDependencies:
+      '@react-spectrum/provider': ^3.0.0
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-aria/color': 3.0.0-beta.28(react-dom@18.2.0)(react@18.2.0)
+      '@react-aria/focus': 3.16.0(react@18.2.0)
+      '@react-aria/i18n': 3.10.0(react@18.2.0)
+      '@react-aria/interactions': 3.20.1(react@18.2.0)
+      '@react-aria/utils': 3.23.0(react@18.2.0)
+      '@react-spectrum/form': 3.7.1(@react-spectrum/provider@3.9.3)(react@18.2.0)
+      '@react-spectrum/label': 3.16.1(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0)
+      '@react-spectrum/provider': 3.9.3(react-dom@18.2.0)(react@18.2.0)
+      '@react-spectrum/textfield': 3.11.1(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0)
+      '@react-spectrum/utils': 3.11.3(react@18.2.0)
+      '@react-stately/color': 3.5.1(react@18.2.0)
+      '@react-types/color': 3.0.0-beta.21(react@18.2.0)
+      '@react-types/shared': 3.22.0(react@18.2.0)
+      '@react-types/textfield': 3.9.0(react@18.2.0)
+      '@swc/helpers': 0.5.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@react-spectrum/combobox@3.12.0(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0):
@@ -3085,6 +3142,21 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-stately/color@3.5.1(react@18.2.0):
+    resolution: {integrity: sha512-bBY5uZsFGw105xNt9e01AtRSb/4NUfBwGU7hbZXZdDvLrgDS0fmDvhg4MGtmNKpGE8HZ57hfAHka78ocI4zX1w==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@internationalized/number': 3.5.0
+      '@internationalized/string': 3.2.0
+      '@react-stately/form': 3.0.0(react@18.2.0)
+      '@react-stately/slider': 3.5.0(react@18.2.0)
+      '@react-stately/utils': 3.9.0(react@18.2.0)
+      '@react-types/color': 3.0.0-beta.21(react@18.2.0)
+      '@swc/helpers': 0.5.3
+      react: 18.2.0
+    dev: false
+
   /@react-stately/combobox@3.8.1(react@18.2.0):
     resolution: {integrity: sha512-FaWkqTXQdWg7ptaeU4iPcqF/kxbRg2ZNUcvW/hiL/enciV5tRCsddvfNqvDvy1L30z9AUwlp9MWqzm/DhBITCw==}
     peerDependencies:
@@ -3458,6 +3530,16 @@ packages:
       react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
     dependencies:
       '@react-types/shared': 3.22.0(react@18.2.0)
+      react: 18.2.0
+    dev: false
+
+  /@react-types/color@3.0.0-beta.21(react@18.2.0):
+    resolution: {integrity: sha512-qKsW+2w3bsvLK2C5h/saiRh8X+Mfy/yf9C/g8U0dx1tjluBJCAgm1QbUeMK8EcQ34djRIwuQHOKzk5vG8wlK4g==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
+    dependencies:
+      '@react-types/shared': 3.22.0(react@18.2.0)
+      '@react-types/slider': 3.7.0(react@18.2.0)
       react: 18.2.0
     dev: false
 

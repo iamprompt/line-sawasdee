@@ -20,6 +20,12 @@
       "label": "URL รูปภาพ",
       "default": "https://bucket.ex10.tech/images/05807ca3-a4e1-11ee-97d4-0242ac12000b/originalContentUrl.jpg"
     },
-    { "key": "name", "type": "profile_name", "label": "จาก" }
+    { "key": "name", "type": "profile_name", "label": "จาก" },
+    {
+      "key": "text_color",
+      "type": "color",
+      "label": "สีตัวอักษร",
+      "default": "#FFD700"
+    }
   ]
 }

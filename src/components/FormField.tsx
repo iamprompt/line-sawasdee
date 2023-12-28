@@ -48,7 +48,17 @@ const FormField = <T extends FieldValues>({
             >
               <Label className="w-32 font-bold">{label}</Label>
               <div className="flex flex-col">
-                <Input ref={ref} className="rounded-lg border py-2 px-4" />
+                {(() => {
+                  switch (type) {
+                    default:
+                      return (
+                        <Input
+                          ref={ref}
+                          className="rounded-lg border py-2 px-4"
+                        />
+                      )
+                  }
+                })()}
                 <FieldError className="text-sm mt-2 text-red-600">
                   {error?.message}
                 </FieldError>

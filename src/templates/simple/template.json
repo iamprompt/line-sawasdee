@@ -9,23 +9,23 @@
         "text": "{{title}}",
         "weight": "bold",
         "size": "xl",
-        "color": "#ffffff",
+        "color": "{{text_color}}",
         "align": "center"
       },
       {
         "type": "text",
         "text": "{{description}}",
         "margin": "xl",
-        "color": "#FFFFFF",
+        "color": "{{text_color}}",
         "wrap": true
       },
       {
         "type": "text",
         "text": "- {{name}}",
         "align": "end",
-        "color": "#FFFFFF"
+        "color": "{{text_color}}"
       }
     ],
-    "backgroundColor": "#000000"
+    "backgroundColor": "{{bg_color}}"
   }
 }

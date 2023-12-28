@@ -17,6 +17,10 @@ export const useTemplateHook = () => {
               return z.number()
             case 'image':
               return z.string().url('กรุณาใส่ลิงค์รูปภาพที่ถูกต้อง')
+            case 'color':
+              return z
+                .string()
+                .regex(/^#[0-9a-fA-F]{6}$/, 'กรุณาใส่สีที่ถูกต้อง')
             case 'text':
             case 'profile_name':
             default:
