@@ -1,27 +1,33 @@
 import { zodResolver } from '@hookform/resolvers/zod'
-import liff from '@line/liff'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Button } from 'react-aria-components'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
+import { FormatTemplateSource } from '@/templates/type'
+import { useTemplateHook } from '@/templates/utils'
+
 import FormField from './FormField'
 
-const schema = z.object({
-  title: z.string().min(1, 'กรุณากรอกหัวเรื่อง'),
-  description: z.string().min(1, 'กรุณากรอกคำอวยพร'),
-  name: z.string().min(1, 'กรุณากรอกชื่อ'),
-  image: z.string().url('กรุณากรอก URL รูปภาพ'),
-})
-
 type DataCustomizeFormProps = {
-  template: any
-  onSubmit: (data: z.infer<typeof schema>) => void
+  template: FormatTemplateSource
+  onSubmit: (data: any) => void
 }
 
 const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
+  const { createDefaultFromFields, createSchemaFromFields } = useTemplateHook()
+
+  const schema = useMemo(
+    () => createSchemaFromFields(template.fields),
+    [template, createSchemaFromFields],
+  )
+
+  const defaultValues = useMemo(
+    () => createDefaultFromFields(template.fields),
+    [template, createDefaultFromFields],
+  )
+
   const {
-    register,
     handleSubmit,
     reset,
     control,
@@ -29,27 +35,12 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     mode: 'onChange',
-    defaultValues: {
-      name: '',
-      title: '',
-      description: '',
-      image: '',
-    },
+    defaultValues: defaultValues,
   })
 
-  const resetDefaultValues = useCallback(async () => {
-    const profile = await liff.getProfile()
-
-    reset(
-      {
-        title: template.defaults.title,
-        description: template.defaults.description,
-        image: template.defaults.image,
-        name: profile.displayName,
-      },
-      { keepDirty: false },
-    )
-  }, [template, reset])
+  const resetDefaultValues = useCallback(() => {
+    reset(defaultValues, { keepDirty: false })
+  }, [reset, defaultValues])
 
   useEffect(() => {
     if (!template) return
@@ -59,9 +50,17 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="flex flex-col space-y-4">
-        <FormField control={control} name="title" label="หัวเรื่อง" />
-        <FormField control={control} name="description" label="คำอวยพร" />
-        <FormField control={control} name="name" label="จาก" />
+        {template.fields.map((field) => {
+          return (
+            <FormField
+              type={field.type}
+              key={field.key}
+              control={control}
+              name={field.key}
+              label={field.label}
+            />
+          )
+        })}
       </div>
       <Button
         isDisabled={!isValid}

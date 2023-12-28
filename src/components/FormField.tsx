@@ -2,6 +2,7 @@ import { FieldError, Input, Label, TextField } from 'react-aria-components'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 
 type FormFieldProps<T extends FieldValues> = {
+  type: string
   control: Control<T>
   label: string
   name: Path<T>

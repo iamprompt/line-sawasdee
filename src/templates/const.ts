@@ -1,4 +1,6 @@
-export const FooterFlexTemplate = {
+import { CFlexBox } from '@/@types/liff'
+
+export const FooterFlexTemplate: CFlexBox = {
   type: 'box',
   layout: 'vertical',
   contents: [
@@ -20,7 +22,7 @@ export const FooterFlexTemplate = {
         },
         {
           type: 'text',
-          text: 'Happy New Year Studio',
+          text: 'Sawasdee Studio',
           flex: 19,
           size: 'xs',
           color: '#999999',

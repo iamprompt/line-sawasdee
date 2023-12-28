@@ -2,6 +2,8 @@ import liff from '@line/liff'
 import consola from 'consola'
 import { createContext, useEffect, useRef, useState } from 'react'
 
+import { Profile } from '@/@types/liff'
+
 export enum LIFFState {
   INITIALIZE = 'INITIALIZE',
   READY = 'READY',
@@ -10,13 +12,16 @@ export enum LIFFState {
 
 type LIFFContextData = {
   state: LIFFState
+  profile: Profile | null
 }
 
 const liffContext = createContext<LIFFContextData>({
   state: LIFFState.INITIALIZE,
+  profile: null,
 })
 
 export const useLIFFContextData = () => {
+  const [profile, setProfile] = useState<Profile | null>(null)
   const [state, setState] = useState<LIFFState>(LIFFState.INITIALIZE)
   const isInitialized = useRef(false)
 
@@ -40,6 +45,12 @@ export const useLIFFContextData = () => {
     try {
       consola.info('Initializing LIFF:', liffId)
       await liff.init({ liffId })
+
+      if (liff.isLoggedIn()) {
+        const profile = await liff.getProfile()
+        setProfile(profile)
+      }
+
       consola.success('LIFF initialized.')
       setState(LIFFState.READY)
     } catch (error) {
@@ -50,6 +61,7 @@ export const useLIFFContextData = () => {
 
   return {
     state,
+    profile,
   }
 }
 
