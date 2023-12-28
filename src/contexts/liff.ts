@@ -44,12 +44,15 @@ export const useLIFFContextData = () => {
 
     try {
       consola.info('Initializing LIFF:', liffId)
-      await liff.init({ liffId })
+      await liff.init({ liffId, withLoginOnExternalBrowser: true })
 
-      if (liff.isLoggedIn()) {
-        const profile = await liff.getProfile()
-        setProfile(profile)
+      if (!liff.isLoggedIn()) {
+        liff.login()
+        return
       }
+
+      const profile = await liff.getProfile()
+      setProfile(profile)
 
       consola.success('LIFF initialized.')
       setState(LIFFState.READY)

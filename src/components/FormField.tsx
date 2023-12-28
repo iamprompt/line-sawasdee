@@ -11,6 +11,7 @@ import {
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { toast } from 'sonner'
 
+import useAnalytics from '@/hooks/useAnalytics'
 import { uploadFile } from '@/utils/ex10'
 
 type FormFieldProps<T extends FieldValues> = {
@@ -26,6 +27,8 @@ const FormField = <T extends FieldValues>({
   label,
   name,
 }: FormFieldProps<T>) => {
+  const { trackEvent } = useAnalytics()
+
   return (
     <Controller
       control={control}
@@ -82,14 +85,17 @@ const FormField = <T extends FieldValues>({
 
                       if (!response) {
                         consola.error('Upload file failed')
+                        trackEvent('upload-file-failed')
                         return
                       }
 
                       onChange(response.originalContentUrl.baseUrl)
                       toast.success('อัพโหลดรูปภาพสำเร็จ')
+                      trackEvent('upload-file-success')
                     } catch (error) {
                       consola.error(error)
                       toast.error('อัพโหลดรูปภาพล้มเหลว')
+                      trackEvent('upload-file-error')
                     }
                   }}
                 >

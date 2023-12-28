@@ -22,7 +22,7 @@ const useAnalytics = () => {
   const trackEvent = useCallback(
     (
       eventName: string,
-      properties: Record<string, string | number | boolean>,
+      properties?: Record<string, string | number | boolean>,
     ) => {
       return pTrackEvent(eventName, {
         props: {
