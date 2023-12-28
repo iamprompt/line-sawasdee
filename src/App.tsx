@@ -1,14 +1,23 @@
 import parse from 'json-templates'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
 import DataCustomizeForm from './components/DataCustomizeForm'
 import TemplateSelector from './components/TemplateSelector'
 import templates from './templates'
 import { shareTargetPicker } from './utils/liff'
+import { trackPageview } from './utils/plausible'
 
 function App() {
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0])
+
+  const tracked = useRef(false)
+
+  useEffect(() => {
+    if (tracked.current) return
+    trackPageview()
+    tracked.current = true
+  }, [])
 
   const onSubmit = async (data: any) => {
     if (!selectedTemplate) return
