@@ -26,6 +26,7 @@ const useAnalytics = () => {
     ) => {
       return pTrackEvent(eventName, {
         props: {
+          task: eventName,
           ...properties,
           ...lineTrackingData,
         },
