@@ -18,7 +18,7 @@ const TemplateSelector = ({ selected, onChange }: TemplateSelectorProps) => {
           >
             <img
               src={template.image}
-              className="w-20 h-20"
+              className="w-20 h-20 object-contain"
               alt={template.name}
             />
 

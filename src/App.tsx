@@ -48,6 +48,9 @@ function App() {
             selected={selectedTemplate}
             onChange={setSelectedTemplate}
           />
+          <div className="text-red-600">
+            * หากเปลี่ยนรูปแบบ ข้อมูลที่กรอกจะถูกล้างทั้งหมด
+          </div>
         </div>
         <div>
           <div className="font-bold text-2xl mb-4 mt-8">ปรับแต่งข้อความ</div>
