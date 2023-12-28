@@ -38,59 +38,27 @@
             "layout": "vertical",
             "contents": [
               {
-                "type": "box",
-                "layout": "horizontal",
-                "contents": [
-                  {
-                    "type": "text",
-                    "text": "{{title}}",
-                    "size": "xl",
-                    "weight": "bold",
-                    "color": "#ffd700"
-                  }
-                ]
+                "type": "text",
+                "text": "{{title}}",
+                "size": "xl",
+                "weight": "bold",
+                "color": "#ffd700",
+                "wrap": true
               },
               {
-                "type": "box",
-                "layout": "horizontal",
-                "contents": [
-                  {
-                    "type": "box",
-                    "layout": "baseline",
-                    "contents": [
-                      {
-                        "type": "text",
-                        "text": "{{description}}",
-                        "color": "#ffd700",
-                        "size": "md"
-                      }
-                    ],
-                    "flex": 0,
-                    "spacing": "lg"
-                  }
-                ]
+                "type": "text",
+                "text": "{{description}}",
+                "color": "#ffd700",
+                "size": "md",
+                "wrap": true
               },
               {
-                "type": "box",
-                "layout": "horizontal",
-                "contents": [
-                  {
-                    "type": "box",
-                    "layout": "baseline",
-                    "contents": [
-                      {
-                        "type": "text",
-                        "text": "{{name}}",
-                        "color": "#ffd700",
-                        "size": "md",
-                        "flex": 0,
-                        "align": "end"
-                      }
-                    ],
-                    "flex": 0,
-                    "spacing": "lg"
-                  }
-                ]
+                "type": "text",
+                "text": "{{name}}",
+                "color": "#ffd700",
+                "size": "md",
+                "flex": 0,
+                "wrap": true
               }
             ],
             "spacing": "xs"

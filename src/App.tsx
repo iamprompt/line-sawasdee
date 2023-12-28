@@ -1,5 +1,6 @@
 import parse from 'json-templates'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 import DataCustomizeForm from './components/DataCustomizeForm'
 import TemplateSelector from './components/TemplateSelector'
@@ -25,8 +26,11 @@ function App() {
         ],
         { isMultiple: true },
       )
+
+      toast.success(`ข้อความถูกส่งสำเร็จแล้ว`)
     } catch (error) {
       console.error(error)
+      toast.error(`เกิดข้อผิดพลาดในการส่งข้อความ`)
     }
   }
 
