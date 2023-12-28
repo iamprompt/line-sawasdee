@@ -85,17 +85,17 @@ const FormField = <T extends FieldValues>({
 
                       if (!response) {
                         consola.error('Upload file failed')
-                        trackEvent('upload-file-failed')
+                        trackEvent('upload-image-file', { status: 'failed' })
                         return
                       }
 
                       onChange(response.originalContentUrl.baseUrl)
                       toast.success('อัพโหลดรูปภาพสำเร็จ')
-                      trackEvent('upload-file-success')
+                      trackEvent('upload-image-file', { status: 'success' })
                     } catch (error) {
                       consola.error(error)
                       toast.error('อัพโหลดรูปภาพล้มเหลว')
-                      trackEvent('upload-file-error')
+                      trackEvent('upload-image-file', { status: 'error' })
                     }
                   }}
                 >

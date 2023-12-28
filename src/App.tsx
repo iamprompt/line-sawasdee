@@ -47,11 +47,17 @@ function App() {
       )
 
       toast.success(`ข้อความถูกส่งสำเร็จแล้ว`)
-      trackEvent('share-success', { template: selectedTemplate.name })
+      trackEvent('flex-share', {
+        template: selectedTemplate.name,
+        status: 'success',
+      })
     } catch (error) {
       console.error(error)
       toast.error(`เกิดข้อผิดพลาดในการส่งข้อความ`)
-      trackEvent('share-error', { template: selectedTemplate.name })
+      trackEvent('flex-share', {
+        template: selectedTemplate.name,
+        status: 'error',
+      })
     }
   }
 
