@@ -4,12 +4,14 @@ import { toast } from 'sonner'
 
 import DataCustomizeForm from './components/DataCustomizeForm'
 import TemplateSelector from './components/TemplateSelector'
+import useAnalytics from './hooks/useAnalytics'
 import templates from './templates'
 import { shareTargetPicker } from './utils/liff'
-import { trackPageview } from './utils/plausible'
 
 function App() {
   const [selectedTemplate, setSelectedTemplate] = useState(templates[0])
+
+  const { trackEvent, trackPageview } = useAnalytics()
 
   const tracked = useRef(false)
 
@@ -17,7 +19,15 @@ function App() {
     if (tracked.current) return
     trackPageview()
     tracked.current = true
-  }, [])
+  }, [trackPageview])
+
+  const onTemplateChange = (template: (typeof templates)[number]) => {
+    trackEvent('change-template', {
+      from_template: selectedTemplate.name,
+      to_template: template.name,
+    })
+    setSelectedTemplate(template)
+  }
 
   const onSubmit = async (data: any) => {
     if (!selectedTemplate) return
@@ -37,9 +47,11 @@ function App() {
       )
 
       toast.success(`ข้อความถูกส่งสำเร็จแล้ว`)
+      trackEvent('share-success', { template: selectedTemplate.name })
     } catch (error) {
       console.error(error)
       toast.error(`เกิดข้อผิดพลาดในการส่งข้อความ`)
+      trackEvent('share-error', { template: selectedTemplate.name })
     }
   }
 
@@ -55,7 +67,7 @@ function App() {
           <div className="font-bold text-2xl mb-4">เลือกรูปแบบ</div>
           <TemplateSelector
             selected={selectedTemplate}
-            onChange={setSelectedTemplate}
+            onChange={onTemplateChange}
           />
           <div className="text-red-600">
             * หากเปลี่ยนรูปแบบ ข้อมูลที่กรอกจะถูกล้างทั้งหมด
