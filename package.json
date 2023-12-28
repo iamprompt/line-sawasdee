@@ -13,6 +13,7 @@
     "@adobe/react-spectrum": "^3.33.0",
     "@hookform/resolvers": "^3.3.3",
     "@line/liff": "^2.23.0",
+    "axios": "^1.6.3",
     "clsx": "^2.0.0",
     "consola": "^3.2.3",
     "json-templates": "^5.0.0",

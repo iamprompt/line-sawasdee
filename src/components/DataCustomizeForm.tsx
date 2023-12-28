@@ -32,11 +32,14 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
     reset,
     control,
     formState: { isValid },
+    watch,
   } = useForm<z.infer<typeof schema>>({
     resolver: zodResolver(schema),
     mode: 'onChange',
     defaultValues: defaultValues,
   })
+
+  const watchAllFields = watch()
 
   const resetDefaultValues = useCallback(() => {
     reset(defaultValues, { keepDirty: false })
