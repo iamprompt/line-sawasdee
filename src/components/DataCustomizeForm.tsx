@@ -11,6 +11,7 @@ const schema = z.object({
   title: z.string().min(1, 'กรุณากรอกหัวเรื่อง'),
   description: z.string().min(1, 'กรุณากรอกคำอวยพร'),
   name: z.string().min(1, 'กรุณากรอกชื่อ'),
+  image: z.string().url('กรุณากรอก URL รูปภาพ'),
 })
 
 type DataCustomizeFormProps = {
@@ -32,6 +33,7 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
       name: '',
       title: '',
       description: '',
+      image: '',
     },
   })
 
@@ -42,6 +44,7 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
       {
         title: template.defaults.title,
         description: template.defaults.description,
+        image: template.defaults.image,
         name: profile.displayName,
       },
       { keepDirty: false },

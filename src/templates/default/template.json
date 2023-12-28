@@ -6,7 +6,7 @@
     "contents": [
       {
         "type": "image",
-        "url": "https://bucket.ex10.tech/images/e49bf9e9-a4ce-11ee-97d4-0242ac12000b/originalContentUrl.jpg",
+        "url": "{{image}}",
         "size": "full",
         "offsetTop": "none",
         "offsetBottom": "none",
