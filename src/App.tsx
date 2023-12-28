@@ -2,10 +2,12 @@ import parse from 'json-templates'
 import { useEffect, useRef, useState } from 'react'
 import { toast } from 'sonner'
 
+import { CFlexBubble } from './@types/liff'
 import DataCustomizeForm from './components/DataCustomizeForm'
 import TemplateSelector from './components/TemplateSelector'
 import useAnalytics from './hooks/useAnalytics'
 import templates from './templates'
+import { useFooterFlexTemplate } from './templates/hook'
 import { shareTargetPicker } from './utils/liff'
 
 function App() {
@@ -29,18 +31,24 @@ function App() {
     setSelectedTemplate(template)
   }
 
-  const onSubmit = async (data: any) => {
+  const footerFlexContent = useFooterFlexTemplate()
+
+  const onSubmit = async (data: Record<string, any>) => {
     if (!selectedTemplate) return
 
     try {
-      const json = parse(selectedTemplate.json)(data) as any
+      const json = parse(selectedTemplate.json)(data) as unknown as CFlexBubble
 
       const result = await shareTargetPicker(
         [
           {
             type: 'flex',
-            altText: 'สวัสดีปีใหม่ 2024',
-            contents: json,
+            altText:
+              data.notification_message || 'ส่งความสุขผ่าน LINE รูปแบบใหม่',
+            contents: {
+              ...json,
+              footer: footerFlexContent,
+            },
           },
         ],
         { isMultiple: true },

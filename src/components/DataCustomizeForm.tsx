@@ -23,7 +23,10 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
   )
 
   const defaultValues = useMemo(
-    () => createDefaultFromFields(template.fields),
+    () => ({
+      notification_message: 'สวัสดีปีใหม่ 2024',
+      ...createDefaultFromFields(template.fields),
+    }),
     [template, createDefaultFromFields],
   )
 
@@ -33,7 +36,11 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
     control,
     formState: { isValid },
   } = useForm<z.infer<typeof schema>>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(
+      schema.extend({
+        notification_message: z.string().min(1, 'กรุณากรอกข้อความแจ้งเตือน'),
+      }),
+    ),
     mode: 'onChange',
     defaultValues: defaultValues,
   })
@@ -50,6 +57,13 @@ const DataCustomizeForm = ({ template, onSubmit }: DataCustomizeFormProps) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
       <div className="flex flex-col space-y-4">
+        <FormField
+          type="text"
+          key="notification_message"
+          control={control}
+          name="notification_message"
+          label="ข้อความแจ้งเตือน"
+        />
         {template.fields.map((field) => {
           return (
             <FormField

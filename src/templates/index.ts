@@ -1,6 +1,5 @@
 import { CFlexBubble } from '@/@types/liff'
 
-import { FooterFlexTemplate } from './const'
 import { FormatTemplateSource, TFMetaFile } from './type'
 
 const modules = import.meta.glob<any>('./**/*.json')
@@ -39,10 +38,7 @@ for (const slug in modulesByPath) {
     name: metadataData.name,
     image: metadataData.image,
     fields: metadataData.fields,
-    json: {
-      ...templateData,
-      footer: FooterFlexTemplate,
-    },
+    json: templateData,
   })
 }
 
