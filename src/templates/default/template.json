@@ -42,6 +42,6 @@
         "color": "{{text_color}}"
       }
     ],
-    "backgroundColor": "{{background_color}}"
+    "backgroundColor": "{{bg_color}}"
   }
 }
