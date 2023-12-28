@@ -1,3 +1,4 @@
+import { parseColor } from '@react-stately/color'
 import consola from 'consola'
 import { UploadIcon } from 'lucide-react'
 import {
@@ -13,6 +14,9 @@ import { toast } from 'sonner'
 
 import useAnalytics from '@/hooks/useAnalytics'
 import { uploadFile } from '@/utils/ex10'
+
+import { ColorArea } from './ColorArea'
+import { ColorSlider } from './ColorSlider'
 
 type FormFieldProps<T extends FieldValues> = {
   type: string
@@ -67,6 +71,29 @@ const FormField = <T extends FieldValues>({
                 </FieldError>
               </div>
             </TextField>
+
+            {type === 'color' && (
+              <div className="space-y-4 mt-6">
+                <ColorArea
+                  value={parseColor(value)}
+                  onChange={(value) => {
+                    onChange(value.toString('hex'))
+                  }}
+                  xChannel="blue"
+                  yChannel="red"
+                  width="100%"
+                  height={96}
+                />
+                <ColorSlider
+                  value={parseColor(value)}
+                  onChange={(value) => {
+                    onChange(value.toString('hex'))
+                  }}
+                  channel="green"
+                  width="100%"
+                />
+              </div>
+            )}
 
             {type === 'image' && (
               <div className="mt-2 flex flex-col">

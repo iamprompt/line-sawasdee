@@ -17,6 +17,15 @@ dependencies:
   '@react-aria/color':
     specifier: 3.0.0-beta.28
     version: 3.0.0-beta.28(react-dom@18.2.0)(react@18.2.0)
+  '@react-aria/focus':
+    specifier: ^3.16.0
+    version: 3.16.0(react@18.2.0)
+  '@react-aria/i18n':
+    specifier: ^3.10.0
+    version: 3.10.0(react@18.2.0)
+  '@react-aria/visually-hidden':
+    specifier: ^3.8.8
+    version: 3.8.8(react@18.2.0)
   '@react-spectrum/color':
     specifier: 3.0.0-beta.29
     version: 3.0.0-beta.29(@react-spectrum/provider@3.9.3)(react-dom@18.2.0)(react@18.2.0)
