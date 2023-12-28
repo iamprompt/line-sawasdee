@@ -72,28 +72,33 @@ const FormField = <T extends FieldValues>({
               </div>
             </TextField>
 
-            {type === 'color' && (
-              <div className="space-y-4 mt-6">
-                <ColorArea
-                  value={parseColor(value)}
-                  onChange={(value) => {
-                    onChange(value.toString('hex'))
-                  }}
-                  xChannel="blue"
-                  yChannel="red"
-                  width="100%"
-                  height={96}
-                />
-                <ColorSlider
-                  value={parseColor(value)}
-                  onChange={(value) => {
-                    onChange(value.toString('hex'))
-                  }}
-                  channel="green"
-                  width="100%"
-                />
-              </div>
-            )}
+            {type === 'color' &&
+              (() => {
+                if (!value) return null
+
+                return (
+                  <div className="space-y-4 mt-6">
+                    <ColorArea
+                      value={parseColor(value)}
+                      onChange={(value) => {
+                        onChange(value.toString('hex'))
+                      }}
+                      xChannel="blue"
+                      yChannel="red"
+                      width="100%"
+                      height={96}
+                    />
+                    <ColorSlider
+                      value={parseColor(value)}
+                      onChange={(value) => {
+                        onChange(value.toString('hex'))
+                      }}
+                      channel="green"
+                      width="100%"
+                    />
+                  </div>
+                )
+              })()}
 
             {type === 'image' && (
               <div className="mt-2 flex flex-col">
