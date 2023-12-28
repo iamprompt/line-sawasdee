@@ -9,11 +9,13 @@ export type TTextField = {
 
 export type TFMetaFile = {
   name: string
+  image: string
   fields: TTextField[]
 }
 
 export type FormatTemplateSource = {
   name: string
+  image: string
   fields: TTextField[]
   json: CFlexBubble
 }

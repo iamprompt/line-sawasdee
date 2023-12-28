@@ -37,6 +37,7 @@ for (const slug in modulesByPath) {
 
   templates.push({
     name: metadataData.name,
+    image: metadataData.image,
     fields: metadataData.fields,
     json: {
       ...templateData,

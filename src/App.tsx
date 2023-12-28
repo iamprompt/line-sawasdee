@@ -35,12 +35,25 @@ function App() {
   }
 
   return (
-    <div className="mx-auto max-w-screen-lg px-4">
-      <TemplateSelector
-        selected={selectedTemplate}
-        onChange={setSelectedTemplate}
-      />
-      <DataCustomizeForm template={selectedTemplate} onSubmit={onSubmit} />
+    <div className="mx-auto max-w-screen-lg px-4 pt-10 pb-8">
+      <div className="mb-12">
+        <div className="font-bold text-4xl text-center">
+          ส่งความสุขผ่าน LINE รูปแบบใหม่
+        </div>
+      </div>
+      <div className="mt-8">
+        <div>
+          <div className="font-bold text-2xl mb-4">เลือกรูปแบบ</div>
+          <TemplateSelector
+            selected={selectedTemplate}
+            onChange={setSelectedTemplate}
+          />
+        </div>
+        <div>
+          <div className="font-bold text-2xl mb-4 mt-8">ปรับแต่งข้อความ</div>
+          <DataCustomizeForm template={selectedTemplate} onSubmit={onSubmit} />
+        </div>
+      </div>
     </div>
   )
 }
