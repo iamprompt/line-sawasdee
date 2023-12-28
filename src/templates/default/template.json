@@ -1,5 +1,21 @@
 {
   "type": "bubble",
+  "hero": {
+    "type": "box",
+    "layout": "vertical",
+    "contents": [
+      {
+        "type": "image",
+        "url": "https://bucket.ex10.tech/images/e49bf9e9-a4ce-11ee-97d4-0242ac12000b/originalContentUrl.jpg",
+        "size": "full",
+        "offsetTop": "none",
+        "offsetBottom": "none",
+        "aspectRatio": "16:9",
+        "aspectMode": "cover"
+      }
+    ],
+    "paddingAll": "none"
+  },
   "body": {
     "type": "box",
     "layout": "vertical",
