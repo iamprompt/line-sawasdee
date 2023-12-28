@@ -70,26 +70,44 @@ function App() {
   }
 
   return (
-    <div className="mx-auto max-w-screen-lg px-4 pt-10 pb-8">
-      <div className="mb-12">
-        <div className="font-bold text-4xl text-center">
-          ส่งความสุขผ่าน LINE รูปแบบใหม่
-        </div>
-      </div>
-      <div className="mt-8">
-        <div>
-          <div className="font-bold text-2xl mb-4">เลือกรูปแบบ</div>
-          <TemplateSelector
-            selected={selectedTemplate}
-            onChange={onTemplateChange}
-          />
-          <div className="text-red-600">
-            * หากเปลี่ยนรูปแบบ ข้อมูลที่กรอกจะถูกล้างทั้งหมด
+    <div>
+      <div className="mx-auto max-w-screen-lg px-4 pt-10 pb-8">
+        <div className="mb-12">
+          <div className="font-bold text-4xl text-center">
+            ส่งความสุขผ่าน LINE รูปแบบใหม่
           </div>
         </div>
-        <div>
-          <div className="font-bold text-2xl mb-4 mt-8">ปรับแต่งข้อความ</div>
-          <DataCustomizeForm template={selectedTemplate} onSubmit={onSubmit} />
+        <div className="mt-8">
+          <div>
+            <div className="font-bold text-2xl mb-4">เลือกรูปแบบ</div>
+            <TemplateSelector
+              selected={selectedTemplate}
+              onChange={onTemplateChange}
+            />
+            <div className="text-red-600">
+              * หากเปลี่ยนรูปแบบ ข้อมูลที่กรอกจะถูกล้างทั้งหมด
+            </div>
+          </div>
+          <div>
+            <div className="font-bold text-2xl mb-4 mt-8">ปรับแต่งข้อความ</div>
+            <DataCustomizeForm
+              template={selectedTemplate}
+              onSubmit={onSubmit}
+            />
+          </div>
+        </div>
+      </div>
+      <div className="border-t">
+        <div className="mx-auto max-w-screen-lg py-2">
+          <div className="text-center">
+            Made with ❤️ by iamPrompt. Big Thanks to{' '}
+            <a
+              href="https://www.ex10.tech/"
+              className="text-blue-500 hover:underline"
+            >
+              EX10
+            </a>
+          </div>
         </div>
       </div>
     </div>
