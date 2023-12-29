@@ -44,10 +44,10 @@ export const useLIFFContextData = () => {
 
     try {
       consola.info('Initializing LIFF:', liffId)
-      await liff.init({ liffId, withLoginOnExternalBrowser: true })
+      await liff.init({ liffId })
 
       if (!liff.isLoggedIn()) {
-        liff.login()
+        liff.login({ redirectUri: window.location.href })
         return
       }
 
