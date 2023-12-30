@@ -1,18 +1,24 @@
 import { ReactNode } from 'react'
 
-import liffContext, { LIFFState, useLIFFContextData } from '@/contexts/liff'
+import liffContext, {
+  LIFFContextData,
+  LIFFState,
+  useLIFFContextData,
+} from '@/contexts/liff'
 
 const LIFFProvider = ({
   children,
 }: {
-  children: ReactNode | (({ isReady }: { isReady: boolean }) => ReactNode)
+  children:
+    | ReactNode
+    | ((params: { isReady: boolean } & LIFFContextData) => ReactNode)
 }) => {
   const value = useLIFFContextData()
 
   return (
     <liffContext.Provider value={value}>
       {typeof children === 'function'
-        ? children({ isReady: value.state === LIFFState.READY })
+        ? children({ isReady: value.state === LIFFState.READY, ...value })
         : children}
     </liffContext.Provider>
   )

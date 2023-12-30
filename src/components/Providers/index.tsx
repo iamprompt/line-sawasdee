@@ -1,5 +1,6 @@
 import { ReactNode } from 'react'
 
+import NotInClientFallback from '../NotInClientFallback'
 import LIFFProvider from './LIFFProvider'
 
 const Providers = ({ children }: { children: ReactNode }) => {
@@ -7,7 +8,7 @@ const Providers = ({ children }: { children: ReactNode }) => {
     <LIFFProvider>
       {({ isReady }) => {
         if (!isReady) return null
-        return children
+        return <NotInClientFallback>{children}</NotInClientFallback>
       }}
     </LIFFProvider>
   )

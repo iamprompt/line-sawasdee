@@ -1,6 +1,7 @@
-import { parseColor } from '@react-stately/color'
+import { Color, parseColor } from '@react-stately/color'
 import consola from 'consola'
 import { UploadIcon } from 'lucide-react'
+import { useEffect, useState } from 'react'
 import {
   Button,
   FieldError,
@@ -72,33 +73,9 @@ const FormField = <T extends FieldValues>({
               </div>
             </TextField>
 
-            {type === 'color' &&
-              (() => {
-                if (!value) return null
-
-                return (
-                  <div className="space-y-4 mt-6">
-                    <ColorArea
-                      value={parseColor(value)}
-                      onChange={(value) => {
-                        onChange(value.toString('hex'))
-                      }}
-                      xChannel="blue"
-                      yChannel="red"
-                      width="100%"
-                      height={96}
-                    />
-                    <ColorSlider
-                      value={parseColor(value)}
-                      onChange={(value) => {
-                        onChange(value.toString('hex'))
-                      }}
-                      channel="green"
-                      width="100%"
-                    />
-                  </div>
-                )
-              })()}
+            {type === 'color' && (
+              <ColorPicker value={value} onChange={onChange} />
+            )}
 
             {type === 'image' && (
               <div className="mt-2 flex flex-col">
@@ -142,6 +119,48 @@ const FormField = <T extends FieldValues>({
         )
       }}
     />
+  )
+}
+
+type ColorPickerProps = {
+  value: string
+  onChange: (value: string) => void
+}
+
+const ColorPicker = ({ value, onChange }: ColorPickerProps) => {
+  const [color, setColor] = useState<Color>(parseColor('#FFFFFF'))
+
+  useEffect(() => {
+    try {
+      setColor(parseColor(value))
+    } catch (error) {
+      return
+    }
+  }, [value])
+
+  if (!value) return null
+
+  return (
+    <div className="space-y-4 mt-6">
+      <ColorArea
+        value={color}
+        onChange={(value) => {
+          onChange(value.toString('hex'))
+        }}
+        xChannel="blue"
+        yChannel="red"
+        width="100%"
+        height={96}
+      />
+      <ColorSlider
+        value={color}
+        onChange={(value) => {
+          onChange(value.toString('hex'))
+        }}
+        channel="green"
+        width="100%"
+      />
+    </div>
   )
 }
 

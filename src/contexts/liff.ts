@@ -10,20 +10,34 @@ export enum LIFFState {
   ERROR = 'ERROR',
 }
 
-type LIFFContextData = {
+export type LIFFContextData = {
   state: LIFFState
   profile: Profile | null
+  login: () => void
+  isInClient: boolean
+  isLoggedIn: boolean
+  os?: string
+  language: string
+  lineVersion?: string
 }
 
 const liffContext = createContext<LIFFContextData>({
   state: LIFFState.INITIALIZE,
   profile: null,
+  login: () => {},
+  isInClient: false,
+  isLoggedIn: false,
+  os: undefined,
+  language: 'th',
+  lineVersion: undefined,
 })
 
-export const useLIFFContextData = () => {
+export const useLIFFContextData = (): LIFFContextData => {
   const [profile, setProfile] = useState<Profile | null>(null)
   const [state, setState] = useState<LIFFState>(LIFFState.INITIALIZE)
   const isInitialized = useRef(false)
+
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
 
   useEffect(() => {
     initialize()
@@ -46,13 +60,10 @@ export const useLIFFContextData = () => {
       consola.info('Initializing LIFF:', liffId)
       await liff.init({ liffId })
 
-      if (!liff.isLoggedIn()) {
-        liff.login({ redirectUri: window.location.href })
-        return
+      if (liff.isLoggedIn()) {
+        const profile = await liff.getProfile()
+        setProfile(profile)
       }
-
-      const profile = await liff.getProfile()
-      setProfile(profile)
 
       consola.success('LIFF initialized.')
       setState(LIFFState.READY)
@@ -62,9 +73,30 @@ export const useLIFFContextData = () => {
     }
   }
 
+  const login = () => {
+    return liff.login({ redirectUri: window.location.href })
+  }
+
+  const getShareUrl = async () => {
+    return liff.permanentLink.createUrl()
+  }
+
+  useEffect(() => {
+    if (state === LIFFState.READY) {
+      console.log('login', liff.isLoggedIn())
+      setIsLoggedIn(liff.isLoggedIn())
+    }
+  }, [state])
+
   return {
     state,
     profile,
+    login,
+    isInClient: liff.isInClient(),
+    isLoggedIn,
+    os: liff.getOS(),
+    language: liff.getLanguage(),
+    lineVersion: liff.getLineVersion() ?? undefined,
   }
 }
 
