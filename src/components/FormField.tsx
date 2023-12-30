@@ -8,6 +8,7 @@ import {
   FileTrigger,
   Input,
   Label,
+  TextArea,
   TextField,
 } from 'react-aria-components'
 import { Control, Controller, FieldValues, Path } from 'react-hook-form'
@@ -58,6 +59,14 @@ const FormField = <T extends FieldValues>({
               <div className="flex flex-col">
                 {(() => {
                   switch (type) {
+                    case 'textarea':
+                      return (
+                        <TextArea
+                          ref={ref}
+                          className="rounded-lg border py-2 px-4"
+                        />
+                      )
+
                     default:
                       return (
                         <Input

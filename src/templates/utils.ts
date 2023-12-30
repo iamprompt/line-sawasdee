@@ -22,6 +22,7 @@ export const useTemplateHook = () => {
                 .string()
                 .regex(/^#[0-9a-fA-F]{6}$/, 'กรุณาใส่สีที่ถูกต้อง')
             case 'text':
+            case 'textarea':
             case 'profile_name':
             default:
               return z.string().min(1, 'กรุณาใส่ข้อความ')
