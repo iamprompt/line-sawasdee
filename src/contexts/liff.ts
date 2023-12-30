@@ -19,6 +19,7 @@ export type LIFFContextData = {
   os?: string
   language: string
   lineVersion?: string
+  getShareUrl: (deeplink?: boolean) => string
 }
 
 const liffContext = createContext<LIFFContextData>({
@@ -30,6 +31,7 @@ const liffContext = createContext<LIFFContextData>({
   os: undefined,
   language: 'th',
   lineVersion: undefined,
+  getShareUrl: () => '',
 })
 
 export const useLIFFContextData = (): LIFFContextData => {
@@ -77,13 +79,18 @@ export const useLIFFContextData = (): LIFFContextData => {
     return liff.login({ redirectUri: window.location.href })
   }
 
-  const getShareUrl = async () => {
-    return liff.permanentLink.createUrl()
+  const getShareUrl = (deeplink = false) => {
+    const url = liff.permanentLink.createUrl()
+
+    if (deeplink) {
+      return url.replace('https://liff.line.me', 'line://app')
+    }
+
+    return url
   }
 
   useEffect(() => {
     if (state === LIFFState.READY) {
-      console.log('login', liff.isLoggedIn())
       setIsLoggedIn(liff.isLoggedIn())
     }
   }, [state])
@@ -97,6 +104,7 @@ export const useLIFFContextData = (): LIFFContextData => {
     os: liff.getOS(),
     language: liff.getLanguage(),
     lineVersion: liff.getLineVersion() ?? undefined,
+    getShareUrl,
   }
 }
 

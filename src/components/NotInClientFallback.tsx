@@ -1,4 +1,3 @@
-import liff from '@line/liff'
 import { ReactNode, useMemo, useState } from 'react'
 import { Button } from 'react-aria-components'
 import QRCode from 'react-qr-code'
@@ -6,7 +5,7 @@ import QRCode from 'react-qr-code'
 import useLIFF from '@/hooks/useLIFF'
 
 const NotInClientFallback = ({ children }: { children: ReactNode }) => {
-  const { os, isInClient, isLoggedIn, login } = useLIFF()
+  const { os, isInClient, isLoggedIn, login, getShareUrl } = useLIFF()
 
   const [bypassNotInClient, setBypassNotInClient] = useState(false)
 
@@ -27,7 +26,7 @@ const NotInClientFallback = ({ children }: { children: ReactNode }) => {
           <h1 className="font-bold text-2xl mt-2 mb-4 text-center">
             เปิดใช้งานในแอป LINE เพื่อประสบการณ์ที่ดี
           </h1>
-          <a href={`line://app/${import.meta.env.VITE_LIFF_ID}`}>
+          <a href={getShareUrl(true)}>
             <Button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg w-full disabled:opacity-70 disabled:cursor-not-allowed">
               เปิดในแอป
             </Button>
@@ -40,10 +39,7 @@ const NotInClientFallback = ({ children }: { children: ReactNode }) => {
             <div className="text-center font-bold text-lg mb-2">
               สแกน QR Code บนโทรศัพท์ เพื่อเปิดบนแอป LINE
             </div>
-            <QRCode
-              value={liff.permanentLink.createUrl()}
-              className="w-28 h-28"
-            />
+            <QRCode value={getShareUrl()} className="w-28 h-28" />
           </div>
           {!isLoggedIn && (
             <Button
