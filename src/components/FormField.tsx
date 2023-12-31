@@ -15,6 +15,7 @@ import { Control, Controller, FieldValues, Path } from 'react-hook-form'
 import { toast } from 'sonner'
 
 import useAnalytics from '@/hooks/useAnalytics'
+import { EventType, track } from '@/utils/analytics'
 import { uploadFile } from '@/utils/ex10'
 
 import { ColorArea } from './ColorArea'
@@ -110,6 +111,12 @@ const FormField = <T extends FieldValues>({
                       onChange(response.originalContentUrl.baseUrl)
                       toast.success('อัพโหลดรูปภาพสำเร็จ')
                       trackEvent('upload-image-file', { status: 'success' })
+                      track(EventType.UPLOAD_IMAGE_SUCCESS, {
+                        file_name: file.name,
+                        file_size: file.size,
+                        file_type: file.type,
+                        file_url: response.originalContentUrl.baseUrl,
+                      })
                     } catch (error) {
                       consola.error(error)
                       toast.error('อัพโหลดรูปภาพล้มเหลว')

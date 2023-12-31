@@ -8,6 +8,7 @@ import TemplateSelector from './components/TemplateSelector'
 import useAnalytics from './hooks/useAnalytics'
 import templates from './templates'
 import { useFooterFlexTemplate } from './templates/hook'
+import { EventType, track } from './utils/analytics'
 import { shareTargetPicker } from './utils/liff'
 
 function App() {
@@ -39,12 +40,13 @@ function App() {
     try {
       const json = parse(selectedTemplate.json)(data) as unknown as CFlexBubble
 
+      const noti_message =
+        data.notification_message || 'ส่งความสุขผ่าน LINE รูปแบบใหม่'
       const result = await shareTargetPicker(
         [
           {
             type: 'flex',
-            altText:
-              data.notification_message || 'ส่งความสุขผ่าน LINE รูปแบบใหม่',
+            altText: noti_message,
             contents: {
               ...json,
               footer: footerFlexContent,
@@ -58,6 +60,13 @@ function App() {
       trackEvent('flex-share', {
         template: selectedTemplate.name,
         status: 'success',
+      })
+      track(EventType.FLEX_SHARE_SUCCESS, {
+        template_id: selectedTemplate.id,
+        notification_message: noti_message,
+        variables: {
+          ...data,
+        },
       })
     } catch (error) {
       console.error(error)

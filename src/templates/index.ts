@@ -35,6 +35,7 @@ for (const slug in modulesByPath) {
   const { default: templateData } = await template()
 
   templates.push({
+    id: metadataData.id,
     name: metadataData.name,
     image: metadataData.image,
     fields: metadataData.fields,

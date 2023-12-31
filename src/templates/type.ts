@@ -8,12 +8,14 @@ export type TTextField = {
 }
 
 export type TFMetaFile = {
+  id: string
   name: string
   image: string
   fields: TTextField[]
 }
 
 export type FormatTemplateSource = {
+  id: string
   name: string
   image: string
   fields: TTextField[]
